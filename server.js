@@ -20,12 +20,15 @@ const download = (url, path, callback) => {
 
 app.get('/:token', (req, res) => {
   let token = req.params.token;
-  let path = `./temporary/${randomizer(12)}.png`;
+  let path = `./${randomizer(12)}.png`;
   
   download(`http://35.228.254.172:3001/files/get/${token}`, path, () => {
     fs.readFile(path, (error, file) => {
       if (file) {
         res.end(file, 'binary');
+        fs.unlink(path, () => {
+          console.log("DELETED FILE");
+        });
       } else {
         res.status(500).end(JSON.stringify({ error: "ServerError" }));
       }
