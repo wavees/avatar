@@ -8,4 +8,4 @@ RUN npm install --no-audit --unsafe-perm
 # This stage just exposes port, on which our application
 # will run. Nothing special.
 EXPOSE 3000
-CMD ["node", "index.js"]
+CMD ["node", "server.js"]
